@@ -39,6 +39,7 @@ package leetcode.editor.cn;
 class FeiBoNaQiShuLieLcof {
     public static void main(String[] args) {
         Solution solution = new FeiBoNaQiShuLieLcof().new Solution();
+        System.out.println(solution.fib(5));
     }
 
     //leetcode submit region begin(Prohibit modification and deletion)
@@ -50,8 +51,8 @@ class FeiBoNaQiShuLieLcof {
             }
             long[][] q = {{1,1},
                     {1,0}};
-            long[][] res = {{1},
-                    {0}};
+            long[][] res = {{1,0},
+                    {0,1}};
 
           int x = n-1;
           while (x>0){
@@ -61,15 +62,15 @@ class FeiBoNaQiShuLieLcof {
               q = pow(q,q);
               x>>=1;
           }
+          return (int)res[0][0];
         }
 
         private long[][] pow(long[][] q, long[][] res) {
-            long[][] r = new long[q.length][q[0].length];
+            long[][] r = new long[2][2];
 
-            long a = q.length,b=q[0].length;
-            for (int i = 0; i < a; i++) {
-                for (int j = 0; j < b; j++) {
-                   r[i][0] = r[i][0]+ q[i][j]*res[j][0];
+            for (int i = 0; i < 2; i++) {
+                for (int j = 0; j < 2; j++) {
+                   r[i][j] = (q[i][0]*res[0][j]+q[i][1]*res[1][j])%MOD;
                 }
             }
 
@@ -100,7 +101,7 @@ class FeiBoNaQiShuLieLcof {
         }
     }
 
-    static class Solution3 {
+    static class Solution4 {
         static final int MOD = 1000000007;
 
         public int fib(int n) {
